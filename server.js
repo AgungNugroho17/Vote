@@ -8,13 +8,15 @@ app.use(express.json());
 
 // Firebase Admin
 
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+
+serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
 
 admin.initializeApp({
-  credential: admin.credential.cert(
-    JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
-  ),
+  credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://pskpd-3df84-default-rtdb.asia-southeast1.firebasedatabase.app"
 });
+
 
 
 const db = admin.database();
