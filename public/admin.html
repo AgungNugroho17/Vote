@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel - Generate Token</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: #fff;
+      padding: 25px;
+      width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      background: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+    .tokens {
+      margin-top: 15px;
+      font-family: monospace;
+      max-height: 200px;
+      overflow-y: auto;
+      background: #f1f1f1;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>🔐 Admin Generate Token</h2>
+
+  <input type="number" id="jumlah" placeholder="Jumlah token" min="1">
+  <button onclick="generateToken()">Generate</button>
+  <button style="background:red" onclick="resetVoting()">
+  Reset Voting
+</button>
+
+
+  <div class="tokens" id="result"></div>
+</div>
+
+<script>
+  async function generateToken() {
+    const jumlah = document.getElementById("jumlah").value;
+    const resultEl = document.getElementById("result");
+
+    resultEl.innerText = "Memproses...";
+
+    try {
+      const res = await fetch("/admin/generate-token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ jumlah })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        resultEl.innerText = data.message;
+        return;
+      }
+
+      resultEl.innerHTML = data.tokens.join("<br>");
+    } catch (err) {
+      resultEl.innerText = "Gagal menghubungi server";
+    }
+  }
+</script>
+<script>
+  async function resetVoting() {
+    if (!confirm("Yakin ingin reset SEMUA voting?")) return;
+
+    const res = await fetch("/admin/reset-voting", {
+      method: "POST"
+    });
+
+    const data = await res.json();
+    alert(data.message);
+  }
+</script>
+
+
+</body>
+</html>

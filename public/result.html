@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Hasil Voting Realtime</title>
+
+  <!-- Firebase CDN (WAJIB) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: #ffffff;
+      padding: 25px;
+      width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .result {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      font-size: 18px;
+    }
+    .count {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h2>📊 Hasil Voting</h2>
+
+  <div class="result">
+    <span>Kandidat 1</span>
+    <span class="count" id="kandidat1">0</span>
+  </div>
+
+  <div class="result">
+    <span>Kandidat 2</span>
+    <span class="count" id="kandidat2">0</span>
+  </div>
+
+  <div class="result">
+    <span>Kandidat 3</span>
+    <span class="count" id="kandidat3">0</span>
+  </div>
+</div>
+
+<script>
+  // 🔥 Firebase Config (SUDAH SESUAI PUNYA KAMU)
+  const firebaseConfig = {
+    apiKey: "AIzaSyBM_CsrEFHU89RcO5ugF0bTm4faqWsv1MU",
+    authDomain: "pskpd-3df84.firebaseapp.com",
+    databaseURL: "https://pskpd-3df84-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "pskpd-3df84",
+    storageBucket: "pskpd-3df84.firebasestorage.app",
+    messagingSenderId: "1000894166798",
+    appId: "1:1000894166798:web:8616033760e79e37bf895f"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Realtime Database reference
+  const db = firebase.database();
+  const votesRef = db.ref("votes");
+
+  // 🔁 REALTIME LISTENER
+  votesRef.on("value", (snapshot) => {
+    const data = snapshot.val() || {};
+
+    document.getElementById("kandidat1").innerText = data.kandidat1 || 0;
+    document.getElementById("kandidat2").innerText = data.kandidat2 || 0;
+    document.getElementById("kandidat3").innerText = data.kandidat3 || 0;
+  });
+</script>
+
+</body>
+</html>
