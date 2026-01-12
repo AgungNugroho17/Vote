@@ -101,10 +101,12 @@
       overflow: hidden;
       transition: all .3s;
       border: 7px solid rgba(255,255,255,.1);
+      
     }
 
    .candidate-card {
   position: relative;
+  
 }
 
 .candidate-card::before {
@@ -142,6 +144,36 @@
       font-weight: 600;
     }
 
+.visi-misi {
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+}
+
+.text-full {
+  margin-top: 10px;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.hidden {
+  display: none;
+}
+
+.read-more-btn {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: #4f8cff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.read-more-btn:hover {
+  text-decoration: underline;
+}
+
+
 .btn {
   transition: all .3s ease;
 }
@@ -175,6 +207,21 @@
 
   </style>
 </head>
+
+<script>
+  function toggleText(button) {
+    const fullText = button.previousElementSibling;
+
+    if (fullText.classList.contains("hidden")) {
+      fullText.classList.remove("hidden");
+      button.textContent = "Read less";
+    } else {
+      fullText.classList.add("hidden");
+      button.textContent = "Read more";
+    }
+  }
+</script>
+
 <body>
 
 <!-- HERO + INTRO -->
@@ -214,21 +261,29 @@ Ingat, setiap pemilih hanya memiliki 1 kesempatan dengan 1 token unik. Gunakan k
     <div class="row g-4">
 
       <!-- Kandidat 1 -->
-      <div class="col-md-4">
+      <div class="col-12">
         <div class="candidate-card h-100">
           <img src="images.png"> 
           <div class="p-4">
             <h5 class="text-center mb-3">AMADEA ZASKIA</h5>
-            <p><strong>Visi:</strong></p>
-            <ul>
-              <p><strong>Mewujudkan PASKAPADA sebagai organisasi yang disiplin,tangguh,dan kepemimpinan yang beretika kepada seluruh anggota.</strong></p>
-            </ul>
-            <p><strong>misi:</strong> </p>
-            <ul>
-              <li>Menanamkan sikap disiplin,tangguh kepada seluruh anggota.</li>
-              <li>Melatih kekompakan,ketangguhan,fisik,dan mental kepada setiap anggota melalui latihan rutin dan kegiatan organisasi.</li>
-              <li>Latihan dasar PBB dan pengetahuan umum PASKAPADA kepada Angkatan selanjutnya.</li>
-            </ul>
+<section class="visi-misi">
+  <h4>VISI</h4>
+
+  <p class="text-preview">
+    mewujudkan PASKAPADA sebagai organisasi yang disiplin,tangguh,dan kepemimpinan yang beretika kepada seluruh anggota.
+  </p>
+
+  <h6>MISI</h6>
+  <p class="text-full hidden">
+    <strong>Menanamkan</strong> sikap disiplin,tangguh kepada seluruh anggota.
+    | <strong>Melatih</strong> kekompakan,ketangguhan,fisik,dan mental kepada setiap anggota melalui latihan rutin dan kegiatan organisasi.
+| <strong>Latihan</strong> dasar PBB dan pengetahuan umum PASKAPADA kepada Angkatan selanjutnya.
+  </p>
+
+  <button class="read-more-btn" onclick="toggleText(this)">
+    Read more
+  </button>
+</section>
             <button class="btn btn-primary w-100 btn-vote"
               onclick="openConfirm('kandidat1','Kandidat 1')">
               Vote Kandidat 1
@@ -238,22 +293,30 @@ Ingat, setiap pemilih hanya memiliki 1 kesempatan dengan 1 token unik. Gunakan k
       </div>
 
       <!-- Kandidat 2 -->
-      <div class="col-md-4">
+      <div class="col-12">
         <div class="candidate-card h-100">
           <img src="gibran.png">
           <div class="p-4">
             <h5 class="text-center mb-3">DAVID AMINO</h5>
-             <p><strong>Visi:</strong></p>
-            <ul>
-              <p><strong>Menjadikan PASKAPADA organisasi sekolah yang berprestasi nasional, berintegritas, patriotik, dan menjadi teladan.</strong></p>
-            </ul>
-            <p><strong>misi:</strong> </p>
-            <ul>
-              <li>1. Membina karakter anggota yang disiplin, tangguh, nasionalis, serta berintegritas dan bertanggung jawab.</li>
-              <li>2. Memupuk kebersamaan, solidaritas, dan semangat kekeluargaan melalui kontribusi untuk kemajuan bersama.</li>
-              <li>3. Meningkatkan profesionalisme dan keterampilan PBB</li>
-              <li>4. Menjalin hubungan harmonis dengan seluruh organisasi sekolah dan berdedikasi menjaga martabat sekolah melalui prestasi berkelanjutan.</li>
-            </ul>
+<section class="visi-misi">
+  <h4>VISI</h4>
+
+  <p class="text-preview">
+   Menjadikan PASKAPADA organisasi sekolah yang berprestasi nasional, berintegritas, patriotik, dan menjadi teladan.
+  </p>
+
+  <h6>MISI</h6>
+  <p class="text-full hidden">
+Membina karakter anggota yang disiplin, tangguh, nasionalis, serta berintegritas dan bertanggung jawab.
+| <strong>Memupuk</strong> kebersamaan, solidaritas, dan semangat kekeluargaan melalui kontribusi untuk kemajuan bersama.
+| <strong>Meningkatkan</strong> profesionalisme dan keterampilan PBB
+| <strong>Menjalin</strong> hubungan harmonis dengan seluruh organisasi sekolah dan berdedikasi menjaga martabat sekolah melalui prestasi berkelanjutan.
+  </p>
+
+  <button class="read-more-btn" onclick="toggleText(this)">
+    Read more
+  </button>
+</section>
             <button class="btn btn-success w-100 btn-vote"
               onclick="openConfirm('kandidat2','Kandidat 2')">
               Vote Kandidat 2
@@ -263,21 +326,31 @@ Ingat, setiap pemilih hanya memiliki 1 kesempatan dengan 1 token unik. Gunakan k
       </div>
 
       <!-- Kandidat 3 -->
-      <div class="col-md-4">
+      <div class="col-12">
         <div class="candidate-card h-100">
           <img src="jokowi.png">
           <div class="p-4">
             <h5 class="text-center mb-3">ERIC MAULANA</h5>
-             <p><strong>Visi:</strong></p>
-            <ul>
-              <p><strong>Menjadikan PASKAPADA sebagai organisasi yang disiplin, solid, berkarakter, berprestasi, serta mampu menjalankan tugas dengan tanggung jawab tinggi, loyalitas, dan jiwa kepemimpinan.</strong></p>
-            </ul>
-            <p><strong>misi:</strong> </p>
-            <ul>
-              <li>Menanamkan disiplin, tanggung jawab, dan sikap nasionalisme kepada seluruh anggota PASKAPADA.</li>
-              <li>Membentuk pasukan yang kompak, saling menghargai, dan solid dalam setiap kegiatan.</li>
-              <li>Menjaga nama baik PASKAPADA dan sekolah di dalam maupun di luar lingkungan sekolah.</li>
-            </ul>
+            <section class="visi-misi">
+  <h4>VISI</h4>
+
+  <p class="text-preview">
+   Menjadikan PASKAPADA sebagai organisasi yang disiplin, solid, berkarakter, berprestasi, serta mampu menjalankan tugas dengan tanggung jawab tinggi, loyalitas, dan jiwa kepemimpinan.
+  </p>
+
+  <h6>MISI</h6>
+  <p class="text-full hidden">
+<strong>Menanamkan</strong> disiplin, tanggung jawab, dan sikap nasionalisme kepada seluruh anggota PASKAPADA.
+| <strong>Membentuk </strong>pasukan yang kompak, saling menghargai, dan solid dalam setiap kegiatan.
+| <strong> Menjaga</strong> nama baik PASKAPADA dan sekolah di dalam maupun di luar lingkungan sekolah.
+  </p>
+
+  <button class="read-more-btn" onclick="toggleText(this)">
+    Read more
+  </button>
+</section>
+
+             
             <button class="btn btn-warning w-100 btn-vote"
               onclick="openConfirm('kandidat3','Kandidat 3')">
               Vote Kandidat 3
